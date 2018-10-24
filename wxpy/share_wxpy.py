@@ -1,4 +1,10 @@
+#!/usr/bin/python3
+# coding=utf-8
 from wxpy import *
+import os,sys
+curPath = os.path.abspath(os.path.dirname(__file__))
+rootPath = os.path.split(curPath)[0]
+sys.path.append(curPath)
 from messages import *
 from wxpy import get_wechat_logger
 import unicodedata

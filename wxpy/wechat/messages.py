@@ -8,6 +8,10 @@ import random
 import apiai
 from bs4 import BeautifulSoup
 import urllib
+import os,sys
+curPath = os.path.abspath(os.path.dirname(__file__))
+rootPath = os.path.split(curPath)[0]
+sys.path.append(curPath)
 from api_tokens import *
 import time
 time1 = time.time()

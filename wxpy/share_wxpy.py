@@ -5,19 +5,20 @@ import os,sys
 curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
 sys.path.append(curPath)
-from messages import *
+print(curPath)
+#####from messages import *
 from wxpy import get_wechat_logger
 import unicodedata
 import re
 import time
 import logging
 import threading
-import re
 from tempfile import NamedTemporaryFile
 from xml.etree import ElementTree as ETree
 from html.parser import HTMLParser
 
-bot = Bot(cache_path=True)
+bot = Bot(cache_path=True,console_qr=True)
+
 # 机器人账号自身
 myself = bot.self
 
@@ -44,8 +45,9 @@ def auto_accept_friends(msg):
 
 
 # 指定一个好友
+print(bot.friends())
 my_friend = bot.friends().search('python')[0]
-# print(bot.friends().stats_text(total=True, sex=True))
+print(bot.friends().stats_text(total=True, sex=True))
 
 # 简单基本聊天
 tuling = Tuling(api_key='7cc0c37863e54801a850b145c76cfae5')

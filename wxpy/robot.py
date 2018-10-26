@@ -19,7 +19,7 @@ def get_response_by_keyword(keyword):
     if '团建' in keyword:
         result = {"type": "image", "content": "3s9Dh5rYdP9QruoJ_M6tIYDnxLLdsQNCMxkY0L2FMi6HhMlNPlkA1-50xaE_imL7"}
     elif 'music' in keyword or '音乐' in keyword:
-        musicurl='http://204.11.1.34:9999/dl.stream.qqmusic.qq.com/C400001oO7TM2DE1OE.m4a?vkey=3DFC73D67AF14C36FD1128A7ABB7247D421A482EBEDA17DE43FF0F68420032B5A2D6818E364CB0BD4EAAD44E3E6DA00F5632859BEB687344&guid=5024663952&uin=1064319632&fromtag=66'
+        musicurl='http://fs.w.kugou.com/201810261426/6498a31690479bd9f3b7ac5a9aa6b1cb/G016/M0A/1C/19/UA0DAFU2KnaAKjtdADfQcvsyA40286.mp3'
         result = {"type": "music", "content": {"title": "80000", "description":"有个男歌手姓巴，他的女朋友姓万，于是这首歌叫80000", "url": musicurl, "hqurl": musicurl}}
     elif '关于' in keyword:
         items = [{"title": "关于我", "description":"喜欢瞎搞一些脚本", "picurl":"https://avatars1.githubusercontent.com/u/12973402?s=460&v=4", "url":"https://github.com/guoruibiao"},

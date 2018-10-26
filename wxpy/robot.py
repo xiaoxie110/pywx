@@ -65,7 +65,7 @@ def getQQMusic(keyword):
             music = random.sample(res['data']['song']['itemlist'], 1)[0]
             musicurl = "http://ws.stream.qqmusic.qq.com/C100" + music['mid'] + ".m4a?fromtag=0&guid=126548448"
             result = {"type": "music",
-                      "content": {"title": music['name'], "description": music['singer'], "url": musicurl, "hqurl": musicurl}}
+                      "content": {"title": music['name'], "description": music['singer'], "url": 'http://music.163.com/m/song/299120', "hqurl": musicurl}}
     else:
         result = {"type": "text", "content": "暂时没有找到相关音乐"}
     print(result)

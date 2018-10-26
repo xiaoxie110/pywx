@@ -178,7 +178,17 @@ class MsgHandler(object):
         itemstr = ""
         for item in items:
             itemstr += str(articlestr.format(item['title'], item['description'], item['picurl'], item['url']))
-
+        itemXml = []
+        for item in items:
+            singleXml = """
+                        <item>
+                            <Title><![CDATA[%s]]></Title>
+                            <Description><![CDATA[%s]]></Description>
+                            <PicUrl><![CDATA[%s]]></PicUrl>
+                            <Url><![CDATA[%s]]></Url>
+                        </item>
+                    """ % (item['title'], item['description'], item['picurl'], item['url'])
+            itemXml.append(singleXml)
         template = """
         <xml>
             <ToUserName><![CDATA[{}]]></ToUserName>
@@ -189,5 +199,6 @@ class MsgHandler(object):
             <Articles>{}</Articles>
         </xml>
         """
-        result = template.format(self.msg.user, self.msg.master, self.time, len(items), itemstr)
+        result = template.format(self.msg.user, self.msg.master, self.time, len(items), " ".join(itemXml))
+        print(result)
         return result

@@ -5,7 +5,7 @@ import json
 
 def get_turing_response(req=""):
     url = "http://www.tuling123.com/openapi/api"
-    secretcode = "嘿嘿，这个就不说啦"
+    secretcode = "7cc0c37863e54801a850b145c76cfae5"
     response = requests.post(url=url, json={"key": secretcode, "info": req, "userid": 12345678})
     return json.loads(response.text)['text'] if response.status_code == 200 else ""
 

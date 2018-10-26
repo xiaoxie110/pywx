@@ -24,7 +24,7 @@ def get_response_by_keyword(keyword):
     if '团建' in keyword:
         result = {"type": "image", "content": "3s9Dh5rYdP9QruoJ_M6tIYDnxLLdsQNCMxkY0L2FMi6HhMlNPlkA1-50xaE_imL7"}
     elif 'music' in keyword or '音乐' in keyword:
-        result = getQQMusic(keyword)
+        result = get163Music(keyword)
     elif '关于' in keyword:
         items = [{"title": "关于我", "description": "喜欢瞎搞一些脚本",
                   "picurl": "https://avatars1.githubusercontent.com/u/12973402?s=460&v=4",
@@ -56,7 +56,8 @@ def loads_jsonp(_jsonp):
 # 获取qq音乐推荐music
 def getQQMusic(keyword):
     keyword = re.sub("音乐|music", '', keyword)
-    url = 'https://c.y.qq.com/splcloud/fcgi-bin/smartbox_new.fcg?is_xml=0&format=jsonp&g_tk=5381&jsonpCallback=SmartboxKeysCallbackmod_top_search3847&loginUin=0&hostUin=0&format=jsonp&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0&key=' + str(keyword)
+    url = 'https://c.y.qq.com/splcloud/fcgi-bin/smartbox_new.fcg?is_xml=0&format=jsonp&g_tk=5381&jsonpCallback=SmartboxKeysCallbackmod_top_search3847&loginUin=0&hostUin=0&format=jsonp&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0&key=' + str(
+        keyword)
     response = requests.get(url=url)
     result = ""
     if response.status_code:
@@ -65,9 +66,29 @@ def getQQMusic(keyword):
             music = random.sample(res['data']['song']['itemlist'], 1)[0]
             musicurl = "http://ws.stream.qqmusic.qq.com/C100" + music['mid'] + ".m4a?fromtag=0&guid=126548448"
             result = {"type": "music",
-                      "content": {"title": music['name'], "description": music['singer'], "url": 'http://music.163.com/m/song/299120', "hqurl": musicurl}}
+                      "content": {"title": music['name'], "description": music['singer'],
+                                  "url": 'http://music.163.com/m/song/299120', "hqurl": musicurl}}
     else:
         result = {"type": "text", "content": "暂时没有找到相关音乐"}
     print(result)
     return result
 
+
+# 获取网易云音乐
+def get163Music(keyword):
+    keyword = re.sub("音乐|music", '', keyword)
+    url = 'http://s.music.163.com/search/get/?type=1&s=' + str(keyword)
+    response = requests.get(url=url)
+    result = ""
+    if response.status_code:
+        res = json.loads(response.text)
+        if 'result' in res:
+            music = random.sample(res['result']['songs'], 1)[0]
+            musicurl = music['page']
+            result = {"type": "music",
+                      "content": {"title": music['name'], "description": music['artists'][0]['name'], "url": musicurl,
+                                  "hqurl": musicurl}}
+    else:
+        result = {"type": "text", "content": "暂时没有找到相关音乐"}
+    print(result)
+    return result

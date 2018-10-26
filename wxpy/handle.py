@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
 import hashlib
 import web
+import time
+from flask import Flask, request, make_response
+import hashlib
+import json
+import xml.etree.ElementTree as ET
+
+from dispatcher import *
 
 
 class Handle(object):
@@ -32,3 +39,15 @@ class Handle(object):
                 return ""
         except Exception as Argument:
             return Argument
+
+    def POST(self):
+        rec = request.stream.read()  # 接收消息
+        dispatcher = MsgDispatcher(rec)
+        data = dispatcher.dispatch()
+        with open("./debug.log", "a") as file:
+            file.write(data)
+            file.close()
+        response = make_response(data)
+        response.content_type = 'application/xml'
+        return response
+

@@ -27,7 +27,7 @@ myself = bot.self
 
 # 启用 puid 属性，并指定 puid 所需的映射数据保存/载入路径
 bot.enable_puid('wxpy_puid.pkl')
-
+print(bot.friends())
 
 # 注册好友请求类消息
 @bot.register(msg_types=FRIENDS)

@@ -1,10 +1,6 @@
 # -*- coding:utf-8 -*-                             #中文编码
-import sys
-import time
 from flask import Flask, request, make_response
 import hashlib
-import json
-import xml.etree.ElementTree as ET
 
 from dispatcher import *
 
@@ -21,7 +17,7 @@ def index():
 @app.route('/wx', methods=['GET', 'POST'])
 def wechat_auth():  # 处理微信请求的处理函数，get方法用于认证，post方法取得微信转发的数据
     if request.method == 'GET':
-        token = '你自己设置好的token'
+        token = 'weixin'
         data = request.args
         signature = data.get('signature', '')
         timestamp = data.get('timestamp', '')
@@ -44,4 +40,4 @@ def wechat_auth():  # 处理微信请求的处理函数，get方法用于认证�
         return response
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=80)
+    app.run(host="0.0.0.0", port=8080)

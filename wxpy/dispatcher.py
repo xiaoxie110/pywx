@@ -1,8 +1,6 @@
 #! /usr/bin python
 # coding: utf8
-import sys
 import time
-import json
 import xml.etree.ElementTree as ET
 from robot import *
 

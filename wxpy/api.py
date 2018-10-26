@@ -1,9 +1,5 @@
 # -*- coding:utf-8 -*-                             #中文编码
 import sys
-from imp import reload
-reload(sys)  # 不加这部分处理中文还是会出问题
-sys.setdefaultencoding('utf-8')
-
 import time
 from flask import Flask, request, make_response
 import hashlib

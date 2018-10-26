@@ -1,9 +1,6 @@
 #! /usr/bin python
 # coding: utf8
 import sys
-from imp import reload
-reload(sys)
-sys.setdefaultencoding("utf8")
 import time
 import json
 import xml.etree.ElementTree as ET

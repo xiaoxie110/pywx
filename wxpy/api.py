@@ -23,10 +23,13 @@ def wechat_auth():  # 处理微信请求的处理函数，get方法用于认证�
         timestamp = data.get('timestamp', '')
         nonce = data.get('nonce', '')
         echostr = data.get('echostr', '')
-        s = [timestamp, nonce, token]
-        s.sort()
-        s = ''.join(s)
-        if (hashlib.sha1(s).hexdigest() == signature):
+        list = [token, timestamp, nonce]
+        list.sort()
+        str_list = ''.join(list)
+        sha = hashlib.sha1()
+        sha.update(str_list.encode('utf-8'))
+        hashcode2 = sha.hexdigest()
+        if (hashcode2 == signature):
             return make_response(echostr)
     else:
         rec = request.stream.read()  # 接收消息
@@ -40,4 +43,4 @@ def wechat_auth():  # 处理微信请求的处理函数，get方法用于认证�
         return response
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host="0.0.0.0", port=80)

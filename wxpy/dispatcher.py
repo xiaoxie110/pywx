@@ -178,17 +178,26 @@ class MsgHandler(object):
         itemstr = ""
         for item in items:
             itemstr += str(articlestr.format(item['title'], item['description'], item['picurl'], item['url']))
-        itemXml = []
-        for item in items:
-            singleXml = """
-                        <item>
-                            <Title><![CDATA[%s]]></Title>
-                            <Description><![CDATA[%s]]></Description>
-                            <PicUrl><![CDATA[%s]]></PicUrl>
-                            <Url><![CDATA[%s]]></Url>
-                        </item>
-                    """ % (item['title'], item['description'], item['picurl'], item['url'])
-            itemXml.append(singleXml)
+        itemstr = """
+        <item>
+            <Title><![CDATA[关于我]]></Title>
+            <Description><![CDATA[喜欢瞎搞一些脚本]]></Description>
+            <PicUrl><![CDATA[https://avatars1.githubusercontent.com/u/12973402?s=460&v=4]]></PicUrl>
+            <Url><![CDATA[https://github.com/guoruibiao]]></Url>
+        </item>                             
+        <item>
+            <Title><![CDATA[我的博客]]></Title>
+            <Description><![CDATA[收集到的，瞎写的一些博客]]></Description>
+            <PicUrl><![CDATA[http://avatar.csdn.net/0/8/F/1_marksinoberg.jpg]]></PicUrl>
+            <Url><![CDATA[http://blog.csdn.net/marksinoberg]]></Url>
+        </item>                   
+        <item>
+            <Title><![CDATA[薛定谔的��]]></Title>
+            <Description><![CDATA[副标题有点奇怪，不知道要怎么设置比较好]]></Description>
+            <PicUrl><![CDATA[https://www.baidu.com/img/bd_logo1.png]]></PicUrl>
+            <Url><![CDATA[http://www.baidu.com]]></Url>
+        </item>
+        """
         template = """
         <xml>
             <ToUserName><![CDATA[{}]]></ToUserName>
@@ -199,6 +208,6 @@ class MsgHandler(object):
             <Articles>{}</Articles>
         </xml>
         """
-        result = template.format(self.msg.user, self.msg.master, self.time, len(items), " ".join(itemXml))
+        result = template.format(self.msg.user, self.msg.master, self.time, len(items), itemstr)
         print(result)
         return result
